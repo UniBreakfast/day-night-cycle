@@ -5,61 +5,128 @@ body {
 }
 
 .dn-scene, .sky, .stars {
+  --sun-size: 5vw;
+  --orbit-diameter: 60vw;
+  --position-angle: 0;
+  --day-duration: 8s;
+  --month-duration: calc(var(--day-duration) * 29.53);
   height: 100vh;
 }
 
 .sky {
-  background: linear-gradient(darkblue, lightblue);
+  background: linear-gradient(#041216 30%, #183137);
+}
+
+.sky::before, .sky::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(#5ad8ff, #e3f9ff 40%);
+  animation: day-opacity var(--day-duration) linear infinite;
+}
+
+.sky::after {
+  background: linear-gradient(#ff033a, #ffa600 85%);
+  animation: evening-opacity var(--day-duration) linear infinite;
 }
 
 .sun-orbit {
-  --sun-size: 5vw;
-  --orbit-diameter: 60vw;
-  --position-angle: 0;
-  --day-duration: .3s;
-  --month-duration: calc(var(--day-duration) * 29.53);
   position: absolute;
   left: calc(50% - var(--orbit-diameter) / 2);
   top: calc(100% - var(--orbit-diameter) / 2);
   width: var(--orbit-diameter);
   height: var(--orbit-diameter);
   animation: rotation var(--day-duration) linear infinite;
-  /* background: #0002; */
-  /* transform: rotate(180deg); */
 }
 
 .sun, .moon {
   width: var(--sun-size);
   height: var(--sun-size);
-  background: yellow;
+  background: #ffff76;
   border-radius: 50%;
+  box-shadow: #ffff76 0 0 calc(var(--sun-size) * 3) var(--sun-size);
 }
 
 .moon {
   position: absolute;
+  background: #ffffb9;
   bottom: 0;
   right: 0;
   overflow: hidden;
-  transform: rotate(45deg);
+  box-shadow: #ffffb9 0 0 var(--sun-size);
+  transform: rotate(50grad);
   animation: rotation var(--day-duration) linear infinite reverse;
 }
 
 .earth-shadow {
-  background: black;
+  background: #121313;
+  box-shadow: #ffffb911 0 0 var(--sun-size) inset;
   width: 5vw;
   height: 5vw;
   border-radius: 50%;
-  animation: month var(--month-duration) linear calc(var(--day-duration) * 29.53 * -1.5) infinite alternate;
+  animation: month var(--month-duration) linear calc(var(--month-duration) * -1.5) infinite alternate;
+}
+
+.star {
+  width: 0.5vw;
+  height: 0.5vw;
+  background: white;
+
 }
 
 @keyframes rotation {
   to {
-    transform: rotate(360deg)
+    transform: rotate(1turn)
   }
 }
 
 @keyframes month {
   to {
     transform: translateX(-100%)
+  }
+}
+
+@keyframes day-opacity {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes evening-opacity {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0;
+  }
+  35% {
+    opacity: 0.7;
+  }
+  55% {
+    opacity: 0.1;
+  }
+  60% {
+    opacity: 0;
+  }
+  80% {
+    opacity: 0.2;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
   }
 }
