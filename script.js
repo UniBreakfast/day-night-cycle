@@ -3,8 +3,21 @@ const maxDayNightCycleDuration = 600 //seconds
 
 for (let i = 0; i < numberOfStars; i++) addStar()
 
-dayNightScene.onmousemove = ({y}) => {
-  dayNightScene.style.setProperty('--day-duration', y / innerHeight * maxDayNightCycleDuration +'s')
+dayNightScene.onmousemove = ({y, movementX, movementY}) => {
+  if (movementX**2 > movementY**2) return
+
+  clearTimeout(dayNightScene.timer)
+
+  if (y < innerHeight / 8) {
+    dayNightScene.timer =
+      setTimeout(changeCycleDuration, 500, y / innerHeight)
+  } else {
+    changeCycleDuration(y / innerHeight)
+  }
+}
+
+function changeCycleDuration(multiplier) {
+  dayNightScene.style.setProperty('--day-duration', multiplier * maxDayNightCycleDuration +'s')
 }
 
 function addStar() {
