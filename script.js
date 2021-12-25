@@ -17,7 +17,7 @@ dayNightScene.onmousemove = ({y, movementX, movementY}) => {
 }
 
 function changeCycleDuration(multiplier) {
-  dayNightScene.style.setProperty('--day-duration', multiplier * maxDayNightCycleDuration +'s')
+  dayNightScene.style.setProperty('--day-duration', (multiplier * maxDayNightCycleDuration || 1) +'s')
 }
 
 function addStar() {
