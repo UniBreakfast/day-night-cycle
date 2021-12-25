@@ -4,16 +4,17 @@ body {
   overflow: hidden;
 }
 
-.dn-scene, .sky, .stars {
+#dayNightScene {
   --sun-size: 5vw;
   --orbit-diameter: 60vw;
   --position-angle: 0;
-  --day-duration: 8s;
+  --day-duration: 60s;
   --month-duration: calc(var(--day-duration) * 29.53);
   height: 100vh;
 }
 
 .sky {
+  height: 100vh;
   background: linear-gradient(#041216 30%, #183137);
 }
 
@@ -44,7 +45,7 @@ body {
   height: var(--sun-size);
   background: #ffff76;
   border-radius: 50%;
-  box-shadow: #ffff76 0 0 calc(var(--sun-size) * 3) var(--sun-size);
+  box-shadow: #ffff76 0 0 calc(var(--sun-size) * 3.5) var(--sun-size);
 }
 
 .moon {
@@ -53,9 +54,9 @@ body {
   bottom: 0;
   right: 0;
   overflow: hidden;
-  box-shadow: #ffffb9 0 0 var(--sun-size);
+  box-shadow: #ffffb944 0 0 calc(var(--sun-size) * 1.4) var(--sun-size);
   transform: rotate(50grad);
-  animation: rotation var(--day-duration) linear infinite reverse;
+  animation: day-opacity var(--day-duration) linear infinite calc(var(--day-duration) * -0.5), rotation var(--day-duration) linear infinite reverse;
 }
 
 .earth-shadow {
@@ -67,11 +68,18 @@ body {
   animation: month var(--month-duration) linear calc(var(--month-duration) * -1.5) infinite alternate;
 }
 
-.star {
-  width: 0.5vw;
-  height: 0.5vw;
-  background: white;
+#stars {
+  height: 100vmax;
+  width: 100vmax;
+  position: absolute;
+  top: calc((100vh - 100vmax) / 2);
+  left: calc((100vw - 100vmax) / 2);
+  animation: day-opacity var(--day-duration) linear infinite calc(var(--day-duration) * -0.5), rotation var(--month-duration) linear infinite;
+}
 
+.star {
+  position: absolute;
+  background: white;
 }
 
 @keyframes rotation {
