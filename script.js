@@ -1,7 +1,10 @@
-for (let i = 0; i < 900; i++) addStar()
+const numberOfStars = 900
+const maxDayNightCycleDuration = 600 //seconds
+
+for (let i = 0; i < numberOfStars; i++) addStar()
 
 dayNightScene.onmousemove = ({y}) => {
-  dayNightScene.style.setProperty('--day-duration', y / innerHeight * 200 +'s')
+  dayNightScene.style.setProperty('--day-duration', y / innerHeight * maxDayNightCycleDuration +'s')
 }
 
 function addStar() {
