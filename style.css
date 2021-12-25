@@ -1,28 +1,31 @@
 body {
   margin: 0;
+  height: 100vh;
+  overflow: hidden;
 }
 .dn-scene, .sky, .stars {
   height: 100vh;
-  overflow: hidden;
 }
 .sky {
   background: linear-gradient(darkblue, lightblue);
 }
 .sun-orbit {
-  --sky-size: 5vw;
+  --sun-size: 5vw;
   --orbit-diameter: 60vw;
   --position-angle: 0;
+  --cycle-duration: 3s;
   position: absolute;
-  left: 50%;
-  top: 100%;
+  left: calc(50% - var(--orbit-diameter) / 2);
+  top: calc(100% - var(--orbit-diameter) / 2);
   width: var(--orbit-diameter);
   height: var(--orbit-diameter);
   background: #0002;
-  animation: orbiting 30s linear infinite;
+  animation: rotation var(--cycle-duration) linear infinite;
+  /* transform: rotate(180deg) */
 }
 .sun, .moon {
-  width: var(--sky-size);
-  height: var(--sky-size);
+  width: var(--sun-size);
+  height: var(--sun-size);
   background: yellow;
   border-radius: 50%;
 }
@@ -30,13 +33,17 @@ body {
   position: absolute;
   bottom: 0;
   right: 0;
+  overflow: hidden;
+  transform: rotate(45deg);
+  animation: rotation var(--cycle-duration) reverse linear infinite;
 }
-@keyframes orbiting {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-
+.earth-shadow {
+  background: black;
+  width: 5vw;
+  height: 5vw;
+  border-radius: 50%;
+  transform: translateX(calc(var(--sun-size) * -0.3));
+}
+@keyframes rotation {
+  to { transform: rotate(360deg) }
 }
