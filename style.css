@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+}
+.dn-scene, .sky, .stars {
+  height: 100vh;
+  overflow: hidden;
+}
+.sky {
+  background: linear-gradient(darkblue, lightblue);
+}
+.sun-orbit {
+  --sky-size: 5vw;
+  --orbit-diameter: 60vw;
+  --position-angle: 0;
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: var(--orbit-diameter);
+  height: var(--orbit-diameter);
+  background: #0002;
+  animation: orbiting 30s linear infinite;
+}
+.sun, .moon {
+  width: var(--sky-size);
+  height: var(--sky-size);
+  background: yellow;
+  border-radius: 50%;
+}
+.moon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+@keyframes orbiting {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+
+}
