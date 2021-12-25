@@ -11,6 +11,7 @@ body {
   --day-duration: 60s;
   --month-duration: calc(var(--day-duration) * 29.53);
   height: 100vh;
+  filter: saturate(1.4);
 }
 
 .sky {
@@ -46,6 +47,7 @@ body {
   background: #ffff76;
   border-radius: 50%;
   box-shadow: #ffff76 0 0 calc(var(--sun-size) * 3.5) var(--sun-size), #ffff76 0 0 calc(var(--sun-size) * 0.4) calc(var(--sun-size) * 0.2);
+  animation: sun-color var(--day-duration) linear infinite;
 }
 
 .moon {
@@ -61,7 +63,7 @@ body {
 
 .earth-shadow {
   background: #121313;
-  box-shadow: #ffffb911 0 0 var(--sun-size) inset;
+  box-shadow: #ffffb911 0 0 var(--sun-size) inset, #121313 0 0 calc(var(--sun-size) * 0.1);
   width: var(--sun-size);
   height: var(--sun-size);
   border-radius: 50%;
@@ -82,6 +84,24 @@ body {
   background: white;
 }
 
+@keyframes sun-color {
+  30% {
+    background: #ffffc1;
+  }
+  32% {
+    background: #ffffc1;
+    filter: none;
+  }
+  37.5% {
+    background: #ff9c9c;
+    filter: drop-shadow(0 0 0 red);
+  }
+
+  87.5% {
+    background: white;
+  }
+}
+
 @keyframes rotation {
   to {
     transform: rotate(1turn)
@@ -98,19 +118,24 @@ body {
   0% {
     opacity: 1;
   }
+
   25% {
     opacity: 1;
   }
+
   35% {
     opacity: 0.8;
   }
+
   40% {
     opacity: 0;
   }
-  85% {
+
+  80% {
     opacity: 0;
   }
-  100% {
+
+  90% {
     opacity: 1;
   }
 }
@@ -119,24 +144,31 @@ body {
   0% {
     opacity: 0;
   }
+
   25% {
     opacity: 0;
   }
+
   35% {
-    opacity: 0.7;
+    opacity: 0.5;
   }
+
   42% {
     opacity: 0.1;
   }
+
   55% {
     opacity: 0;
   }
+
   80% {
     opacity: 0;
   }
+
   90% {
     opacity: 0.3;
   }
+
   100% {
     opacity: 0;
   }
